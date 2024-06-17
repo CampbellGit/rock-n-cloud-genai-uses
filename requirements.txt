@@ -1,0 +1,9 @@
+FastAPI
+Boto3
+langchain
+langchain-google-vertexai
+google-generativeai
+fitz
+ipython
+langchain-aws
+anthropic
