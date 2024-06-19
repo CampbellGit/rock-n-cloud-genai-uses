@@ -1,19 +1,10 @@
 import os
-
 import boto3
-import asyncio
-from langchain.chains import ConversationChain
 from langchain.llms.bedrock import Bedrock
-from langchain.memory import ConversationBufferWindowMemory
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-from langchain.callbacks import AsyncIteratorCallbackHandler
-from fastapi.responses import StreamingResponse
-from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.runnables import RunnableLambda, RunnablePassthrough
-from operator import itemgetter
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
 
-import json
 
 HTTP_ACCEPT= 'application/json'
 MODEL_ID='anthropic.claude-v2'
@@ -22,19 +13,10 @@ AWS_SERVICE_BEDROCK_RUNTIME='bedrock-runtime'
 
 
 def send_code_to_claude(code_file: str):
-    callback = AsyncIteratorCallbackHandler()
 
     bedrock_runtime = boto3.client(
         service_name=AWS_SERVICE_BEDROCK_RUNTIME, 
         region_name=AWS_REGION
-    )
-
-    cl_llm = Bedrock(
-        model_id=MODEL_ID,
-        client=bedrock_runtime,
-        model_kwargs={"max_tokens_to_sample": 1000, "temperature": 0.9},
-        streaming=True,
-        callbacks=[StreamingStdOutCallbackHandler()]
     )
 
     model = Bedrock(
@@ -44,11 +26,11 @@ def send_code_to_claude(code_file: str):
         streaming=True,
         callbacks=[StreamingStdOutCallbackHandler()]
     )
-    memory = ConversationBufferWindowMemory(k=7)
+    #memory = ConversationBufferWindowMemory(k=7)
 
    
 
-    memory.load_memory_variables({'history': []})
+    #memory.load_memory_variables({'history': []})
 
 
 

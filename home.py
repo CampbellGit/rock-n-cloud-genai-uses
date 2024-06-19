@@ -15,7 +15,7 @@ st.markdown(
     developping generative AI apps can be.
 
     **👈 Select a demo from the sidebar** to see some examples!
-    ### Mandatory sponsorship links?
+    ### Mandatory sponsorship links:
     - Check out [Daveo](https://www.daveo.fr)
     - Explore streamlit in its [documentation](https://docs.streamlit.io)
     - Learn more about [Langchain](https://www.langchain.com/)

@@ -7,7 +7,7 @@ from langchain_community.chat_models import BedrockChat
 def get_llm():
 
     llm = BedrockChat( #create a Bedrock llm client
-        model_id="anthropic.claude-3-sonnet-20240229-v1:0", #use the AI21 Jurassic-2 Ultra model
+        model_id="anthropic.claude-3-sonnet-20240229-v1:0",
         model_kwargs = {"temperature": 0.0 } #for data extraction, minimum temperature is best
     )
 
