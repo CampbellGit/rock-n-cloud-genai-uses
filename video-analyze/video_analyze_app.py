@@ -23,12 +23,12 @@ image_options = list(image_options_dict)
 
 
 with col1:
-    st.subheader("Select an Image")
+    st.subheader("Select a Video")
 
-    image_selection = st.radio("Please choose a picture:", image_options)
+    image_selection = st.radio("Please choose a video:", image_options)
     
     if image_selection == 'Other':
-        uploaded_file = st.file_uploader("Select an image", type=['png', 'jpg'], label_visibility="collapsed")
+        uploaded_file = st.file_uploader("Select an video", type=['png', 'jpg'], label_visibility="collapsed")
     else:
         uploaded_file = None
     
@@ -48,13 +48,7 @@ with col2:
     if go_button:
         with st.spinner("Processing..."):
             
-            if uploaded_file:
-                image_bytes = uploaded_file.getvalue()
-            else:
-                image_bytes = glib.get_bytes_from_file(image_options_dict[image_selection])
-            
             response = glib.get_response_from_model(
-                image_bytes=image_bytes,
             )
         
         st.write(response)
