@@ -18,7 +18,7 @@ prompt_options_dict = {
         "ville": string,
         "code_postal": number
         }]""",
-    "Table": "Analyze this list and output it as a CSV"
+    "Table": "Analyze this list and output it as a table"
 }
 
 prompt_options = list(prompt_options_dict)
