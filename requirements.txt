@@ -7,3 +7,6 @@ fitz
 ipython
 langchain-aws
 anthropic
+streamlit
+vertexai
+langchain_community
