@@ -1,9 +1,7 @@
-import boto3
-import json
 import base64
 from io import BytesIO
 import vertexai
-from vertexai.generative_models import GenerativeModel, Content, Part, FinishReason
+from vertexai.generative_models import GenerativeModel, Part
 import vertexai.preview.generative_models as generative_models
 
 
@@ -76,8 +74,5 @@ def get_response_from_model():
       safety_settings=safety_settings,
       stream=True,
   )
-    #gemini_output=""
   for response in responses:
       yield response.text  # Yield each chunk of response text
-    #print(response.text, end="")
-      #gemini_output+=response.text
