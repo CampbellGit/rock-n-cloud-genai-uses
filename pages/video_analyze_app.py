@@ -42,7 +42,6 @@ with col1:
 
     
     
-
 with col2:
     st.subheader("Result")
  
@@ -54,7 +53,9 @@ with col2:
              # Handle the streaming response
             full_text = ""
             response_placeholder = st.empty()  # Create a placeholder for dynamic content
- 
+
             for chunk in streaming_response:
                 full_text += chunk  # Accumulate chunks of streamed data
                 response_placeholder.text(full_text)  # Update the placeholder with new content
+              
+        st.download_button(label= "Download here", data= full_text)
