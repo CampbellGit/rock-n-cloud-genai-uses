@@ -35,7 +35,7 @@ def get_response_from_model(prompt_content, image_bytes, mask_prompt=None):
         generative_models.HarmCategory.HARM_CATEGORY_HARASSMENT: generative_models.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
     }
         
-    vertexai.init(project=env.GCP_PROJECT, location="europe-west9")
+    vertexai.init(project="daveo-gcp-gemini-sbx-8895", location="europe-west9")
     model = GenerativeModel(
         "gemini-1.5-pro-001",
     )

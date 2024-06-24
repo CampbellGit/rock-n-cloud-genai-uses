@@ -29,7 +29,8 @@ def get_response_from_model():
 
   video1 = Part.from_uri(
     mime_type="video/mp4",
-    uri="gs://ai-samples-daveo/DAVEO _ Bref, je suis consultant chez Daveo.mp4")
+    #uri="gs://ai-samples-daveo/DAVEO _ Bref, je suis consultant chez Daveo.mp4")
+    uri="gs://ai-samples-daveo/pat_patrouille.mp4")
  
   generation_config = {
         "max_output_tokens": 8192,
@@ -44,14 +45,39 @@ def get_response_from_model():
         generative_models.HarmCategory.HARM_CATEGORY_HARASSMENT: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
     }
   responses = model.generate_content(
-      [video1, """Create the close captions for this video.Do not caption computer screens. Output everything as an SRT file."""],
+      [video1, """Create the close captions for this video. Do not caption computer screens. Output everything as an SRT file.
+       The output should like something like this, with different colours for characters, please have the captions exactly match the sound:
+          1
+          00:00:00,000 --> 00:00:02,000
+          <font color="#FFFF00">Horloge:</font>
+          <font color="#FFFF00">-Tic tac</font>
+
+          2
+          00:00:03,000 --> 00:00:05,000
+          <font color="#FFFF00">David:</font>
+          <font color="#FFFF00">-Hum, c'est embarrassant.</font>
+
+          3
+          00:00:10,000 --> 00:00:12,000
+          <font color="#FFFF00">David:</font>
+          <font color="#FFFF00">-Bref, il était temps pour moi
+          de changer de boulot.</font>
+
+          4
+          00:00:12,000 --> 00:00:17,000
+          <font color="#FFFF00">David:</font>
+          <font color="#FFFF00">-Première étape, je diffuse mon CV
+          sur internet. Deuxième étape,
+          je regarde les 200 messages</font>
+       
+       
+       """],
       generation_config=generation_config,
       safety_settings=safety_settings,
       stream=True,
   )
-  gemini_output=""
+    #gemini_output=""
   for response in responses:
-    print(response.text, end="")
-    gemini_output+=response.text
-
-  return gemini_output
+      yield response.text  # Yield each chunk of response text
+    #print(response.text, end="")
+      #gemini_output+=response.text

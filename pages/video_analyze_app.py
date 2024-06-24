@@ -1,6 +1,7 @@
 
 import streamlit as st
 import video_analyze_lib as glib
+from langchain_community.callbacks.streamlit import StreamlitCallbackHandler
 
 st.set_page_config(layout="wide", page_title="Video Analysis")
 
@@ -44,11 +45,16 @@ with col1:
 
 with col2:
     st.subheader("Result")
-
+ 
     if go_button:
-        with st.spinner("Processing..."):
-            
-            response = glib.get_response_from_model(
-            )
-        
-        st.write(response)
+        #use an empty container for streaming output
+        with st.spinner("Streaming..."):
+            st_callback = StreamlitCallbackHandler(st.container())
+            streaming_response = glib.get_response_from_model()
+             # Handle the streaming response
+            full_text = ""
+            response_placeholder = st.empty()  # Create a placeholder for dynamic content
+ 
+            for chunk in streaming_response:
+                full_text += chunk  # Accumulate chunks of streamed data
+                response_placeholder.text(full_text)  # Update the placeholder with new content
